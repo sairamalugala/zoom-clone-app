@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/styles.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+</head>
+
+<body>
+
+    <!-- join form start -->
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h1>Join</h1>
+            <form onsubmit="return joinRoom(event, this)">
+                <input id="username" name="username" placeholder="user" required autocomplete="off" type="text">
+                <input type="text" id="chatroom" name="chatroom" required autocomplete="off" placeholder="room">
+                <button type="submit">JOIN</button>
+            </form>
+        </div>
+    </div>
+    <!-- join form end -->
+
+    <!-- chat start -->
+    <div class="chat hide">
+        <div id="active-users-list" class="chat__sidebar">
+            <div id="messages" class="chat__messages"></div>
+
+            <div class="compose">
+                <input name="message" id="message-input" required autocomplete="off" placeholder="Message" onkeydown="sendMsg(event, this)">
+            </div>
+        </div>
+        <div class="chat__main">
+            <div id="video__col">
+
+            </div>
+            <div class="footer_elements">
+                <div class="icons"><i onclick="muteUnmute(this);" class="fa fa-microphone" aria-hidden="true"></i>
+                </div>
+                <div class="icons"><i onclick="palyPause(this);" class="fas fa-video"></i></div>
+                <div><a onclick="leaveRoom(event, this)" style="cursor: pointer;">Leave Room</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- chat end -->
+
+    <!-- template start -->
+    <script id="message-template" type="text/html">
+        <div class="message">
+            <p>
+                <span class="message__name">@{username}</span>
+                <span class="message__meta">@{deliveredAt}</span>
+            </p>
+            <p>@{message}</p>
+        </div>
+    </script>
+    <!-- template end -->
+    <script src="/js/peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/scripts.js"></script>
+</body>
+
+</html>
